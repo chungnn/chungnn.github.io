@@ -1,7 +1,7 @@
 ## Công cụ monitor giúp mình bay đúng đường
 
 Trong số các công việc hàng ngày của tôi bây giờ là ngồi nhìn cái biểu đồ grafana hàng ngày các bạn ạ
-![Grafana](https://github.com/chungnn/chungnn.github.io/blob/cd1625b2b0c7c79b05bc209af532db4f8b2c3683/images/grafana.png)
+![Grafana](https://github.com/chungnn/chungnn.github.io/blob/cd1625b2b0c7c79b05bc209af532db4f8b2c3683/images/grafana.png?raw=true)
 
 If the file does not start with a header, then the post title will be derived from the filename.
 
