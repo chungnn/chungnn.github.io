@@ -1,6 +1,7 @@
 ## Công cụ monitor giúp mình bay đúng đường
 
-Due to a plugin called `jekyll-titles-from-headings` which is supported by GitHub Pages by default. The above header (in the markdown file) will be automatically used as the pages title.
+Trong số các công việc hàng ngày của tôi bây giờ là ngồi nhìn cái biểu đồ grafana hàng ngày các bạn ạ
+![Grafana](https://myoctocat.com/assets/images/base-octocat.svg)
 
 If the file does not start with a header, then the post title will be derived from the filename.
 
