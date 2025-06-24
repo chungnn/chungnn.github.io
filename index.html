@@ -14,9 +14,22 @@
             <p class="date">Ngày: <span id="current-date"></span></p>
         </header>
 
+        <!-- Menu chọn loại thử thách -->
+        <section class="menu-section">
+            <h2>🎮 Chọn Loại Thử Thách</h2>
+            <div class="menu-buttons">
+                <button class="menu-btn active" onclick="switchChallenge('pattern')">
+                    🔺 Thử Thách Hình Dạng
+                </button>
+                <button class="menu-btn" onclick="switchChallenge('math')">
+                    🔢 Thử Thách Tính Toán
+                </button>
+            </div>
+        </section>
+
         <!-- Phần dành cho trẻ em -->
-        <section class="challenge-section">
-            <h2>🎯 Thử Thách Của Bé</h2>
+        <section class="challenge-section" id="pattern-challenge">
+            <h2>🎯 Thử Thách Hình Dạng</h2>
             <div class="challenge-container">
                 <div class="pattern-display">
                     <div class="shape-sequence" id="shape-sequence">
@@ -34,6 +47,26 @@
             </div>
         </section>
 
+        <!-- Thử thách tính toán -->
+        <section class="challenge-section" id="math-challenge" style="display: none;">
+            <h2>🎯 Thử Thách Tính Toán</h2>
+            <div class="challenge-container">
+                <div class="math-display">
+                    <div class="math-sequence" id="math-sequence">
+                        <!-- Các phép tính sẽ được tạo bằng JavaScript -->
+                    </div>
+                    <div class="question-mark">?</div>
+                </div>
+                
+                <div class="answer-options" id="math-answer-options">
+                    <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
+                </div>
+                
+                <div class="result" id="math-result"></div>
+                <button class="new-challenge-btn" onclick="generateNewMathChallenge()">Thử Thách Mới</button>
+            </div>
+        </section>
+
         <!-- Phần dành cho bố mẹ -->
         <section class="parent-section">
             <h3>📋 Kịch Bản Cho Bố Mẹ</h3>
@@ -45,10 +78,12 @@
                 </p>
                 <div class="tips">
                     <p><strong>💡 Mẹo:</strong></p>
-                    <ul>
+                    <ul id="tips-list">
                         <li>Khuyến khích bé quan sát kỹ trước khi chọn</li>
                         <li>Nếu bé chọn sai, hãy giải thích quy luật một cách đơn giản</li>
                         <li>Khen ngợi khi bé tìm ra đáp án đúng</li>
+                        <li>Với thử thách tính toán: có thể dùng đồ vật cụ thể để minh họa</li>
+                        <li>Với thử thách hình dạng: giúp bé nhận biết quy luật lặp lại</li>
                     </ul>
                 </div>
             </div>

@@ -27,13 +27,61 @@ const challenges = [
     }
 ];
 
+// Dữ liệu các thử thách tính toán
+const mathChallenges = [
+    {
+        numbers: [2, 3],
+        operator: '+',
+        correct: 5,
+        script: 'Con ơi, 2 cộng 3 bằng bao nhiêu nhỉ? Hãy tính trong đầu và chọn đáp án đúng!'
+    },
+    {
+        numbers: [5, 2],
+        operator: '-',
+        correct: 3,
+        script: 'Bé thử tính xem, 5 trừ 2 bằng bao nhiêu? Hãy suy nghĩ kỹ nhé!'
+    },
+    {
+        numbers: [3, 2],
+        operator: '×',
+        correct: 6,
+        script: 'Con có 3 nhóm, mỗi nhóm có 2 cái. Tổng cộng có bao nhiêu cái nhỉ?'
+    },
+    {
+        numbers: [8, 2],
+        operator: '÷',
+        correct: 4,
+        script: 'Có 8 cái kẹo chia đều cho 2 bạn. Mỗi bạn được bao nhiêu cái kẹo?'
+    },
+    {
+        numbers: [4, 4],
+        operator: '+',
+        correct: 8,
+        script: 'Con có 4 cái bút, bố cho thêm 4 cái nữa. Tổng cộng con có bao nhiêu cái bút?'
+    },
+    {
+        numbers: [10, 3],
+        operator: '-',
+        correct: 7,
+        script: 'Con có 10 cái kẹo, con ăn mất 3 cái. Còn lại bao nhiêu cái kẹo?'
+    },
+    {
+        numbers: [2, 4],
+        operator: '×',
+        correct: 8,
+        script: 'Trong mỗi hộp có 2 cái bánh. Con có 4 hộp. Tổng cộng có bao nhiêu cái bánh?'
+    }
+];
+
 let currentChallenge = 0;
+let currentMathChallenge = 0;
+let currentChallengeType = 'pattern'; // 'pattern' hoặc 'math'
 let selectedAnswer = null;
 
 // Khởi tạo trang
 document.addEventListener('DOMContentLoaded', function() {
     displayCurrentDate();
-    generateChallenge();
+    switchChallenge('pattern'); // Bắt đầu với thử thách hình dạng
 });
 
 // Hiển thị ngày hiện tại
@@ -50,17 +98,26 @@ function displayCurrentDate() {
 
 // Tạo thử thách mới
 function generateNewChallenge() {
-    currentChallenge = (currentChallenge + 1) % challenges.length;
+    if (currentChallengeType === 'pattern') {
+        currentChallenge = (currentChallenge + 1) % challenges.length;
+    } else {
+        currentMathChallenge = (currentMathChallenge + 1) % mathChallenges.length;
+    }
     generateChallenge();
     clearResult();
 }
 
 // Hiển thị thử thách
 function generateChallenge() {
-    const challenge = challenges[currentChallenge];
+    let challenge;
+    if (currentChallengeType === 'pattern') {
+        challenge = challenges[currentChallenge];
+    } else {
+        challenge = mathChallenges[currentMathChallenge];
+    }
     
     // Hiển thị dãy hình
-    displayPattern(challenge.pattern);
+    displayPattern(challenge.pattern || challenge.numbers);
     
     // Tạo các lựa chọn
     createAnswerOptions(challenge.correct);
@@ -255,3 +312,164 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Chuyển đổi giữa các loại thử thách
+function switchChallenge(type) {
+    currentChallengeType = type;
+    
+    // Cập nhật trạng thái menu
+    document.querySelectorAll('.menu-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    if (type === 'pattern') {
+        document.querySelector('[onclick="switchChallenge(\'pattern\')"]').classList.add('active');
+        document.getElementById('pattern-challenge').style.display = 'block';
+        document.getElementById('math-challenge').style.display = 'none';
+        generateChallenge();
+    } else if (type === 'math') {
+        document.querySelector('[onclick="switchChallenge(\'math\')"]').classList.add('active');
+        document.getElementById('pattern-challenge').style.display = 'none';
+        document.getElementById('math-challenge').style.display = 'block';
+        generateMathChallenge();
+    }
+}
+
+// Tạo thử thách tính toán mới
+function generateNewMathChallenge() {
+    currentMathChallenge = (currentMathChallenge + 1) % mathChallenges.length;
+    generateMathChallenge();
+    clearMathResult();
+}
+
+// Hiển thị thử thách tính toán
+function generateMathChallenge() {
+    const challenge = mathChallenges[currentMathChallenge];
+    
+    // Hiển thị phép tính
+    displayMathProblem(challenge);
+    
+    // Tạo các lựa chọn
+    createMathAnswerOptions(challenge.correct);
+    
+    // Cập nhật kịch bản cho bố mẹ
+    updateParentScript(challenge.script);
+}
+
+// Hiển thị phép tính
+function displayMathProblem(challenge) {
+    const container = document.getElementById('math-sequence');
+    container.innerHTML = '';
+    
+    // Số đầu tiên
+    const num1 = document.createElement('div');
+    num1.className = 'math-number';
+    num1.textContent = challenge.numbers[0];
+    num1.style.animationDelay = '0s';
+    container.appendChild(num1);
+    
+    // Toán tử
+    const operator = document.createElement('div');
+    operator.className = 'math-operator';
+    operator.textContent = challenge.operator;
+    operator.style.animationDelay = '0.3s';
+    container.appendChild(operator);
+    
+    // Số thứ hai
+    const num2 = document.createElement('div');
+    num2.className = 'math-number';
+    num2.textContent = challenge.numbers[1];
+    num2.style.animationDelay = '0.6s';
+    container.appendChild(num2);
+    
+    // Dấu bằng
+    const equals = document.createElement('div');
+    equals.className = 'math-operator';
+    equals.textContent = '=';
+    equals.style.animationDelay = '0.9s';
+    container.appendChild(equals);
+}
+
+// Tạo các lựa chọn đáp án cho thử thách tính toán
+function createMathAnswerOptions(correctAnswer) {
+    const container = document.getElementById('math-answer-options');
+    container.innerHTML = '';
+    
+    // Tạo các đáp án sai
+    const wrongAnswers = [];
+    for (let i = 0; i < 3; i++) {
+        let wrongAnswer;
+        do {
+            // Tạo đáp án sai trong khoảng hợp lý
+            wrongAnswer = correctAnswer + Math.floor(Math.random() * 11) - 5;
+        } while (wrongAnswer === correctAnswer || wrongAnswer < 0 || wrongAnswers.includes(wrongAnswer));
+        wrongAnswers.push(wrongAnswer);
+    }
+    
+    // Trộn tất cả đáp án
+    const allAnswers = [correctAnswer, ...wrongAnswers];
+    const shuffledAnswers = shuffleArray([...allAnswers]);
+    
+    shuffledAnswers.forEach(answer => {
+        const option = document.createElement('div');
+        option.className = 'math-answer-option';
+        option.textContent = answer;
+        option.onclick = () => selectMathAnswer(option, answer, correctAnswer);
+        container.appendChild(option);
+    });
+}
+
+// Xử lý khi chọn đáp án toán
+function selectMathAnswer(optionElement, selectedAnswer, correctAnswer) {
+    // Xóa selection cũ
+    document.querySelectorAll('.math-answer-option').forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+    });
+    
+    // Đánh dấu lựa chọn hiện tại
+    optionElement.classList.add('selected');
+    
+    // Kiểm tra đáp án sau một chút delay
+    setTimeout(() => {
+        checkMathAnswer(optionElement, selectedAnswer, correctAnswer);
+    }, 500);
+}
+
+// Kiểm tra đáp án toán
+function checkMathAnswer(optionElement, selectedAnswer, correctAnswer) {
+    const resultDiv = document.getElementById('math-result');
+    
+    if (selectedAnswer === correctAnswer) {
+        optionElement.classList.remove('selected');
+        optionElement.classList.add('correct');
+        resultDiv.textContent = '🎉 Tuyệt vời! Bé tính đúng rồi!';
+        resultDiv.className = 'result success';
+        
+        // Hiệu ứng pháo hoa
+        createConfetti();
+    } else {
+        optionElement.classList.remove('selected');
+        optionElement.classList.add('wrong');
+        
+        // Hiển thị đáp án đúng
+        document.querySelectorAll('.math-answer-option').forEach(opt => {
+            if (parseInt(opt.textContent) === correctAnswer) {
+                opt.classList.add('correct');
+            }
+        });
+        
+        resultDiv.textContent = `🤔 Chưa đúng rồi. Đáp án đúng là ${correctAnswer}. Hãy thử lại nhé!`;
+        resultDiv.className = 'result error';
+    }
+}
+
+// Xóa kết quả toán
+function clearMathResult() {
+    const resultDiv = document.getElementById('math-result');
+    resultDiv.textContent = '';
+    resultDiv.className = 'result';
+    
+    document.querySelectorAll('.math-answer-option').forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+    });
+}
