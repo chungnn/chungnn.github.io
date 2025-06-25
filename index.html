@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thử Thách Logic Hàng Ngày</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Ứng dụng giáo dục tương tác giúp trẻ em phát triển tư duy logic và kỹ năng tính toán">
+    <meta name="keywords" content="giáo dục, trẻ em, logic, tính toán, thử thách">
 </head>
 <body>
     <div class="container">
@@ -17,55 +19,53 @@
         <!-- Menu chọn loại thử thách -->
         <section class="menu-section">
             <h2>🎮 Chọn Loại Thử Thách</h2>
-            <div class="menu-buttons">
-                <button class="menu-btn active" onclick="switchChallenge('pattern')">
-                    🔺 Thử Thách Hình Dạng
-                </button>
-                <button class="menu-btn" onclick="switchChallenge('math')">
-                    🔢 Thử Thách Tính Toán
-                </button>
+            <div class="menu-buttons" id="menu-buttons">
+                <!-- Menu buttons sẽ được tạo động bởi JavaScript -->
             </div>
         </section>
 
-        <!-- Phần dành cho trẻ em -->
-        <section class="challenge-section" id="pattern-challenge">
-            <h2>🎯 Thử Thách Hình Dạng</h2>
-            <div class="challenge-container">
-                <div class="pattern-display">
-                    <div class="shape-sequence" id="shape-sequence">
-                        <!-- Các hình sẽ được tạo bằng JavaScript -->
+        <!-- Container cho tất cả các thử thách -->
+        <div id="challenges-container">
+            <!-- Thử thách hình dạng -->
+            <section class="challenge-section" id="pattern-challenge">
+                <h2>🎯 Thử Thách Hình Dạng</h2>
+                <div class="challenge-container">
+                    <div class="pattern-display">
+                        <div class="shape-sequence" id="shape-sequence">
+                            <!-- Các hình sẽ được tạo bằng JavaScript -->
+                        </div>
+                        <div class="question-mark">?</div>
                     </div>
-                    <div class="question-mark">?</div>
+                    
+                    <div class="answer-options" id="answer-options">
+                        <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
+                    </div>
+                    
+                    <div class="result" id="result"></div>
+                    <button class="new-challenge-btn" onclick="generateNewChallenge()">Thử Thách Mới</button>
                 </div>
-                
-                <div class="answer-options" id="answer-options">
-                    <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
-                </div>
-                
-                <div class="result" id="result"></div>
-                <button class="new-challenge-btn" onclick="generateNewChallenge()">Thử Thách Mới</button>
-            </div>
-        </section>
+            </section>
 
-        <!-- Thử thách tính toán -->
-        <section class="challenge-section" id="math-challenge" style="display: none;">
-            <h2>🎯 Thử Thách Tính Toán</h2>
-            <div class="challenge-container">
-                <div class="math-display">
-                    <div class="math-sequence" id="math-sequence">
-                        <!-- Các phép tính sẽ được tạo bằng JavaScript -->
+            <!-- Thử thách tính toán -->
+            <section class="challenge-section" id="math-challenge" style="display: none;">
+                <h2>🎯 Thử Thách Tính Toán</h2>
+                <div class="challenge-container">
+                    <div class="math-display">
+                        <div class="math-sequence" id="math-sequence">
+                            <!-- Các phép tính sẽ được tạo bằng JavaScript -->
+                        </div>
+                        <div class="question-mark">?</div>
                     </div>
-                    <div class="question-mark">?</div>
+                    
+                    <div class="answer-options" id="math-answer-options">
+                        <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
+                    </div>
+                    
+                    <div class="result" id="math-result"></div>
+                    <button class="new-challenge-btn" onclick="generateNewMathChallenge()">Thử Thách Mới</button>
                 </div>
-                
-                <div class="answer-options" id="math-answer-options">
-                    <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
-                </div>
-                
-                <div class="result" id="math-result"></div>
-                <button class="new-challenge-btn" onclick="generateNewMathChallenge()">Thử Thách Mới</button>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <!-- Phần dành cho bố mẹ -->
         <section class="parent-section">
@@ -73,8 +73,7 @@
             <div class="script-box">
                 <p><strong>Hướng dẫn:</strong></p>
                 <p id="parent-script">
-                    "Con nhìn này, có một dãy hình. Hãy quan sát kỹ xem có quy luật gì không. 
-                    Theo con, hình tiếp theo sẽ là gì nhỉ? Hãy bấm vào đáp án mà con nghĩ là đúng!"
+                    Chọn một thử thách để bắt đầu!
                 </p>
                 <div class="tips">
                     <p><strong>💡 Mẹo:</strong></p>
@@ -90,6 +89,16 @@
         </section>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Loading indicator -->
+    <div id="loading" style="display: none;">
+        <p>Đang tải thử thách...</p>
+    </div>
+
+    <!-- JavaScript modules -->
+    <script src="js/base-challenge.js"></script>
+    <script src="js/challenges/pattern-challenge.js"></script>
+    <script src="js/challenges/math-challenge.js"></script>
+    <script src="js/template-manager.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

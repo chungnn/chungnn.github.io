@@ -1,0 +1,224 @@
+/* Pattern Challenge Styles */
+.challenge-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.challenge-section h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.challenge-container {
+    background: #f8f9ff;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.pattern-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.shape-sequence {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.shape {
+    width: 60px;
+    height: 60px;
+    border: 3px solid #333;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.shape:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.circle {
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b6b, #ff5252);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.square {
+    background: linear-gradient(45deg, #4ecdc4, #26a69a);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 52px solid #667eea;
+    border-top: none;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    position: relative;
+}
+
+.triangle:after {
+    content: '';
+    position: absolute;
+    top: 52px;
+    left: -30px;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 52px solid #5a67d8;
+}
+
+.question-mark {
+    font-size: 3em;
+    color: #667eea;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.answer-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.option {
+    background: white;
+    border: 3px solid transparent;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.option:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-color: #667eea;
+}
+
+.option:hover:before {
+    left: 100%;
+}
+
+.option.selected {
+    border-color: #667eea;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transform: translateY(-5px);
+}
+
+.option.selected .shape {
+    filter: brightness(1.2);
+}
+
+.option.correct {
+    border-color: #4ecdc4;
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    animation: bounce-success 0.6s ease;
+}
+
+.option.wrong {
+    border-color: #ff6b6b;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+    animation: shake-option 0.6s ease;
+}
+
+@keyframes bounce-success {
+    0%, 100% {
+        transform: translateY(-5px) scale(1);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.05);
+    }
+}
+
+@keyframes shake-option {
+    0%, 100% {
+        transform: translateY(-5px) translateX(0);
+    }
+    25% {
+        transform: translateY(-5px) translateX(-5px);
+    }
+    75% {
+        transform: translateY(-5px) translateX(5px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .challenge-section {
+        padding: 30px 15px;
+    }
+    
+    .challenge-container {
+        padding: 20px;
+    }
+    
+    .shape {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .triangle {
+        border-left-width: 25px;
+        border-right-width: 25px;
+        border-bottom-width: 43px;
+    }
+    
+    .answer-options {
+        gap: 15px;
+    }
+    
+    .option {
+        padding: 15px;
+    }
+    
+    .question-mark {
+        font-size: 2.5em;
+    }
+}
