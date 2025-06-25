@@ -17,19 +17,16 @@ class ChallengeApp {
         if (this.initialized) return;
 
         try {
+            console.log('🚀 Starting Challenge App initialization...');
+            
             // Hiển thị ngày hiện tại
             this.displayCurrentDate();
 
-            // Khởi tạo template manager
-            this.templateManager = new TemplateManager();
-
             // Đăng ký các thử thách
             await this.registerChallenges();
+            console.log(`📦 Registered ${this.challenges.size} challenges:`, Array.from(this.challenges.keys()));
 
-            // Tạo menu động
-            this.templateManager.generateMenuButtons(this.challenges);
-
-            // Khởi tạo menu
+            // Khởi tạo menu (buttons đã có sẵn trong HTML)
             this.initializeMenu();
 
             // Bắt đầu với thử thách mặc định
@@ -46,19 +43,33 @@ class ChallengeApp {
      * Đăng ký các loại thử thách
      */
     async registerChallenges() {
-        // Đăng ký thử thách hình dạng
-        if (window.PatternChallenge) {
-            this.challenges.set('pattern', new PatternChallenge());
-        }
+        // Lấy danh sách thử thách từ config
+        const enabledChallenges = window.ChallengeConfig ? 
+            window.ChallengeConfig.getEnabledChallenges() : 
+            {
+                'pattern': { className: 'PatternChallenge' },
+                'math': { className: 'MathChallenge' },
+                'queue': { className: 'QueueChallenge' }
+            };
 
-        // Đăng ký thử thách tính toán
-        if (window.MathChallenge) {
-            this.challenges.set('math', new MathChallenge());
+        // Đăng ký từng thử thách
+        for (const [type, config] of Object.entries(enabledChallenges)) {
+            const className = config.className;
+            if (window[className]) {
+                this.challenges.set(type, new window[className]());
+                console.log(`✅ Registered ${type} challenge`);
+            } else {
+                console.warn(`⚠️ Challenge class ${className} not found for type ${type}`);
+            }
         }
 
         // Khởi tạo tất cả thử thách
         for (const [type, challenge] of this.challenges) {
-            await challenge.init();
+            try {
+                await challenge.init();
+            } catch (error) {
+                console.error(`❌ Failed to initialize ${type} challenge:`, error);
+            }
         }
     }
 
@@ -66,13 +77,9 @@ class ChallengeApp {
      * Khởi tạo menu
      */
     initializeMenu() {
-        const menuButtons = document.querySelectorAll('.menu-btn');
-        menuButtons.forEach(btn => {
-            const challengeType = btn.getAttribute('onclick')?.match(/switchChallenge\('(\w+)'\)/)?.[1];
-            if (challengeType) {
-                btn.onclick = () => this.switchChallenge(challengeType);
-            }
-        });
+        // Menu buttons đã có onclick handlers trong HTML
+        // Chỉ cần đảm bảo app instance có thể truy cập được
+        console.log('📋 Menu initialized - buttons ready in HTML');
     }
 
     /**
@@ -105,11 +112,14 @@ class ChallengeApp {
     updateMenuState(activeType) {
         document.querySelectorAll('.menu-btn').forEach(btn => {
             btn.classList.remove('active');
-            const challengeType = btn.getAttribute('onclick')?.match(/switchChallenge\('(\w+)'\)/)?.[1];
-            if (challengeType === activeType) {
+            
+            // Kiểm tra onclick attribute để xác định loại challenge
+            const onclickAttr = btn.getAttribute('onclick');
+            if (onclickAttr && onclickAttr.includes(`'${activeType}'`)) {
                 btn.classList.add('active');
             }
         });
+        console.log(`🎯 Menu state updated - active: ${activeType}`);
     }
 
     /**

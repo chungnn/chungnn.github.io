@@ -1,0 +1,308 @@
+/* Queue Challenge Styles */
+.queue-visualization {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.queue-title {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.queue-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.queue-person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 80px;
+    background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.queue-person:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.queue-person.special-person {
+    background: linear-gradient(145deg, #ff6b6b, #ff5252);
+    border-color: #ff3d3d;
+    color: white;
+    animation: pulse-special 2s infinite;
+}
+
+.queue-person.special-person-2 {
+    background: linear-gradient(145deg, #4ecdc4, #26a69a);
+    border-color: #009688;
+    color: white;
+    animation: pulse-special-2 2s infinite;
+}
+
+.position-number {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #667eea;
+    color: white;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 8px;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.special-person .position-number {
+    background: #ff3d3d;
+}
+
+.special-person-2 .position-number {
+    background: #009688;
+}
+
+@keyframes pulse-special {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 5px 20px rgba(255, 107, 107, 0.5);
+    }
+}
+
+@keyframes pulse-special-2 {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 3px 10px rgba(78, 205, 196, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 5px 20px rgba(78, 205, 196, 0.5);
+    }
+}
+
+.queue-question {
+    margin-bottom: 20px;
+}
+
+.question-box {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.question-box:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.question-box h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.question-box p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.queue-answer-option {
+    background: linear-gradient(145deg, #96ceb4, #ffeaa7);
+    border: 3px solid transparent;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    min-width: 100px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.queue-answer-option:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.queue-answer-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-color: #667eea;
+}
+
+.queue-answer-option:hover:before {
+    left: 100%;
+}
+
+.queue-answer-option.selected {
+    border-color: #667eea;
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    color: white;
+    transform: translateY(-5px);
+}
+
+.queue-answer-option.correct {
+    border-color: #4ecdc4;
+    background: linear-gradient(145deg, #4ecdc4, #44a08d);
+    color: white;
+    animation: bounce-success 0.6s ease;
+}
+
+.queue-answer-option.wrong {
+    border-color: #ff6b6b;
+    background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+    color: white;
+    animation: shake 0.6s ease;
+}
+
+/* Result message styles */
+.success-message, .error-message {
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.success-message {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    border: 2px solid #4ecdc4;
+    color: #155724;
+}
+
+.error-message {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    border: 2px solid #ff6b6b;
+    color: #721c24;
+}
+
+.explanation {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 8px;
+    font-size: 0.9em;
+    border-left: 4px solid #667eea;
+}
+
+.encourage {
+    margin-top: 8px;
+    font-style: italic;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .queue-line {
+        gap: 8px;
+    }
+    
+    .queue-person {
+        width: 50px;
+        height: 70px;
+        font-size: 1.2em;
+    }
+    
+    .position-number {
+        font-size: 0.6em;
+        padding: 1px 4px;
+    }
+    
+    .queue-answer-option {
+        font-size: 1.5em;
+        padding: 15px;
+        margin: 8px;
+        min-width: 80px;
+    }
+    
+    .question-box {
+        padding: 15px;
+    }
+    
+    .question-box h3 {
+        font-size: 1.1em;
+    }
+    
+    .question-box p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .queue-person {
+        width: 45px;
+        height: 60px;
+        font-size: 1em;
+    }
+    
+    .queue-answer-option {
+        font-size: 1.3em;
+        padding: 12px;
+        margin: 5px;
+        min-width: 70px;
+    }
+    
+    .queue-line {
+        gap: 5px;
+    }
+    
+    .queue-visualization {
+        padding: 15px;
+    }
+}

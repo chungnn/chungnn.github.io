@@ -121,10 +121,14 @@ class TemplateManager {
         const menuContainer = document.getElementById('menu-buttons');
         if (!menuContainer) return;
 
-        const challengeConfigs = {
-            'pattern': { icon: '🔺', title: 'Thử Thách Hình Dạng' },
-            'math': { icon: '🔢', title: 'Thử Thách Tính Toán' }
-        };
+        // Sử dụng config nếu có, fallback về hardcode
+        const challengeConfigs = window.ChallengeConfig ? 
+            window.ChallengeConfig.getEnabledChallenges() : 
+            {
+                'pattern': { name: 'Thử Thách Hình Dạng', icon: '🔺' },
+                'math': { name: 'Thử Thách Tính Toán', icon: '🔢' },
+                'queue': { name: 'Thử Thách Xếp Hàng', icon: '👥' }
+            };
 
         let buttonsHTML = '';
         let isFirst = true;
@@ -135,7 +139,7 @@ class TemplateManager {
                 buttonsHTML += this.render('menu-button', {
                     type: type,
                     icon: config.icon,
-                    title: config.title,
+                    title: config.name,
                     activeClass: isFirst ? 'active' : ''
                 });
                 isFirst = false;
@@ -143,6 +147,7 @@ class TemplateManager {
         }
 
         menuContainer.innerHTML = buttonsHTML;
+        console.log(`📋 Generated ${challenges.size} menu buttons`);
     }
 }
 

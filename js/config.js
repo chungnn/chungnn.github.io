@@ -18,6 +18,12 @@ const ChallengeConfig = {
             className: 'MathChallenge',
             description: 'Thực hiện phép tính cơ bản'
         },
+        'queue': {
+            name: 'Thử Thách Xếp Hàng',
+            icon: '👥',
+            className: 'QueueChallenge',
+            description: 'Bài toán logic về xếp hàng và vị trí'
+        },
         // Dễ dàng thêm thử thách mới
         'memory': {
             name: 'Thử Thách Trí Nhớ',

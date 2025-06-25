@@ -20,7 +20,15 @@
         <section class="menu-section">
             <h2>🎮 Chọn Loại Thử Thách</h2>
             <div class="menu-buttons" id="menu-buttons">
-                <!-- Menu buttons sẽ được tạo động bởi JavaScript -->
+                <button class="menu-btn active" onclick="challengeApp && challengeApp.switchChallenge('pattern')">
+                    🔺 Thử Thách Hình Dạng
+                </button>
+                <button class="menu-btn" onclick="challengeApp && challengeApp.switchChallenge('math')">
+                    🔢 Thử Thách Tính Toán
+                </button>
+                <button class="menu-btn" onclick="challengeApp && challengeApp.switchChallenge('queue')">
+                    👥 Thử Thách Xếp Hàng
+                </button>
             </div>
         </section>
 
@@ -65,6 +73,27 @@
                     <button class="new-challenge-btn" onclick="generateNewMathChallenge()">Thử Thách Mới</button>
                 </div>
             </section>
+
+            <!-- Thử thách xếp hàng -->
+            <section class="challenge-section" id="queue-challenge" style="display: none;">
+                <h2>🎯 Thử Thách Xếp Hàng</h2>
+                <div class="challenge-container">
+                    <div class="queue-visualization" id="queue-visualization">
+                        <!-- Hình ảnh hàng người sẽ được tạo bằng JavaScript -->
+                    </div>
+                    
+                    <div class="queue-question" id="queue-question">
+                        <!-- Câu hỏi sẽ được tạo bằng JavaScript -->
+                    </div>
+                    
+                    <div class="answer-options" id="queue-answer-options">
+                        <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
+                    </div>
+                    
+                    <div class="result" id="queue-result"></div>
+                    <button class="new-challenge-btn" onclick="generateNewQueueChallenge()">Thử Thách Mới</button>
+                </div>
+            </section>
         </div>
 
         <!-- Phần dành cho bố mẹ -->
@@ -83,6 +112,7 @@
                         <li>Khen ngợi khi bé tìm ra đáp án đúng</li>
                         <li>Với thử thách tính toán: có thể dùng đồ vật cụ thể để minh họa</li>
                         <li>Với thử thách hình dạng: giúp bé nhận biết quy luật lặp lại</li>
+                        <li>Với thử thách xếp hàng: hãy hướng dẫn bé đếm từng người một cách cẩn thận</li>
                     </ul>
                 </div>
             </div>
@@ -95,9 +125,11 @@
     </div>
 
     <!-- JavaScript modules -->
+    <script src="js/config.js"></script>
     <script src="js/base-challenge.js"></script>
     <script src="js/challenges/pattern-challenge.js"></script>
     <script src="js/challenges/math-challenge.js"></script>
+    <script src="js/challenges/queue-challenge.js"></script>
     <script src="js/template-manager.js"></script>
     <script src="js/app.js"></script>
 </body>
