@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản phẩm Shopee</title>
+    <title>Sản phẩm hot - Shopee</title>
     <style>
         * {
             margin: 0;
@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 1000px;
             width: 100%;
             background: white;
             border-radius: 20px;
@@ -64,6 +64,20 @@
             text-align: center;
         }
 
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
         .product-images {
             margin-bottom: 30px;
         }
@@ -71,7 +85,7 @@
         .product-image-main {
             width: 100%;
             max-width: 500px;
-            height: auto;
+            height: 400px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin-bottom: 15px;
@@ -229,10 +243,6 @@
                 <div class="loading">Đang tải thông tin sản phẩm...</div>
             </div>
             
-            <a href="https://s.shopee.vn/gIn99ibbp" class="product-link" target="_blank" rel="noopener noreferrer">
-                Mua ngay trên Shopee
-            </a>
-            
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">✅</div>
@@ -263,43 +273,69 @@
     </div>
 
     <script>
-        // Hình ảnh sản phẩm
-        const productImages = [
-            'https://down-vn.img.susercontent.com/file/6e35e26bd637992acec1fced09ea8095.webp',
-            'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lkgi91fart0cc2.webp'
+        // Danh sách sản phẩm
+        const products = [
+            {
+                name: 'Tất Thể thao Redikick R365 Cổ cao Có đệm Chống hôi chân vớ Bóng Rổ Pickleball Gym Chạy Bộ',
+                price: '56.000₫ - 179.000₫',
+                url: 'https://s.shopee.vn/gIn99ibbp',
+                images: [
+                    'https://down-vn.img.susercontent.com/file/6e35e26bd637992acec1fced09ea8095.webp',
+                    'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lkgi91fart0cc2.webp'
+                ]
+            },
+            {
+                name: 'ANTAY1-Áo khoác Jean (vải Đẹp) Full mẫu xanh denim/ nhạt Retro dáng lỡ Siêu đẹp #J8039',
+                price: '208.999₫ - 216.600₫',
+                url: 'https://s.shopee.vn/VzMygYBJw',
+                images: [
+                    'https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg27hz09mdqi40.webp',
+                    'https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg6dy8367hu6ad.webp'
+                ]
+            }
         ];
         
         function displayProduct() {
             const container = document.getElementById('productContainer');
             
-            let html = '<div class="product-images">';
-            html += `<img src="${productImages[0]}" alt="Product" class="product-image-main" id="mainImage">`;
+            let html = '<div class="products-grid">';
             
-            if (productImages.length > 1) {
-                html += '<div class="product-thumbnails">';
-                productImages.forEach((img, index) => {
-                    html += `<img src="${img}" alt="Thumbnail ${index + 1}" 
-                             class="product-thumbnail ${index === 0 ? 'active' : ''}" 
-                             onclick="changeMainImage('${img}', this)">`;
-                });
+            products.forEach((product, productIndex) => {
+                html += '<div class="product-card">';
+                html += '<div class="product-images">';
+                html += `<img src="${product.images[0]}" alt="${product.name}" class="product-image-main" id="mainImage${productIndex}">`;
+                
+                if (product.images.length > 1) {
+                    html += '<div class="product-thumbnails">';
+                    product.images.forEach((img, index) => {
+                        html += `<img src="${img}" alt="Thumbnail ${index + 1}" 
+                                 class="product-thumbnail ${index === 0 ? 'active' : ''}" 
+                                 onclick="changeMainImage('${img}', this, ${productIndex})">`;
+                    });
+                    html += '</div>';
+                }
                 html += '</div>';
-            }
-            html += '</div>';
+                
+                html += '<div class="product-info-box">';
+                html += `<div class="product-title">${product.name}</div>`;
+                html += `<div class="product-price">${product.price}</div>`;
+                html += '</div>';
+                
+                html += `<a href="${product.url}" class="product-link" target="_blank" rel="noopener noreferrer">Mua ngay trên Shopee</a>`;
+                html += '</div>';
+            });
             
-            html += '<div class="product-info-box">';
-            html += '<div class="product-title">Tất Thể thao Redikick R365 Cổ cao Có đệm Chống hôi chân vớ Bóng Rổ Pickleball Gym Chạy Bộ</div>';
-            html += '<div class="product-price">56.000₫ - 179.000₫</div>';
             html += '</div>';
-            
             container.innerHTML = html;
         }
         
-        function changeMainImage(imgUrl, thumbnail) {
-            const mainImage = document.getElementById('mainImage');
+        function changeMainImage(imgUrl, thumbnail, productIndex) {
+            const mainImage = document.getElementById('mainImage' + productIndex);
             mainImage.src = imgUrl;
             
-            // Cập nhật active thumbnail
-            document.querySelectorAll('.product-thumbnail').forEach(t => {
+            // Cập nhật active thumbnail trong cùng product card
+            const card = thumbnail.closest('.product-card');
+            card.querySelectorAll('.product-thumbnail').forEach(t => {
                 t.classList.remove('active');
             });
             thumbnail.classList.add('active');
