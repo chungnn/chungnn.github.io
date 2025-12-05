@@ -3,134 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thử Thách Logic Hàng Ngày</title>
-    <link rel="stylesheet" href="styles.css">
-    <meta name="description" content="Ứng dụng giáo dục tương tác giúp trẻ em phát triển tư duy logic và kỹ năng tính toán">
-    <meta name="keywords" content="giáo dục, trẻ em, logic, tính toán, thử thách">
+    <title>Sản phẩm Shopee</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ee4d2d 0%, #ff6b35 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .product-images {
+            margin-bottom: 30px;
+        }
+
+        .product-image-main {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .product-thumbnails {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .product-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            object-fit: cover;
+        }
+
+        .product-thumbnail:hover {
+            border-color: #ee4d2d;
+            transform: scale(1.05);
+        }
+
+        .product-thumbnail.active {
+            border-color: #ee4d2d;
+        }
+
+        .product-info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 28px;
+            color: #ee4d2d;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .product-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .product-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #ee4d2d 0%, #ff6b35 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(238, 77, 45, 0.4);
+        }
+
+        .product-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(238, 77, 45, 0.6);
+        }
+
+        .product-link:active {
+            transform: translateY(0);
+        }
+
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .info p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .shopee-logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            padding: 15px;
+            background: #fff5f3;
+            border-radius: 10px;
+            border: 2px solid #fee;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .feature-text {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .product-link {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>🧠 Thử Thách Logic Hàng Ngày</h1>
-            <p class="date">Ngày: <span id="current-date"></span></p>
-        </header>
-
-        <!-- Menu chọn loại thử thách -->
-        <section class="menu-section">
-            <h2>🎮 Chọn Loại Thử Thách</h2>
-            <div class="menu-buttons" id="menu-buttons">
-                <button class="menu-btn active" onclick="challengeApp && challengeApp.switchChallenge('pattern')">
-                    🔺 Thử Thách Hình Dạng
-                </button>
-                <button class="menu-btn" onclick="challengeApp && challengeApp.switchChallenge('math')">
-                    🔢 Thử Thách Tính Toán
-                </button>
-                <button class="menu-btn" onclick="challengeApp && challengeApp.switchChallenge('queue')">
-                    👥 Thử Thách Xếp Hàng
-                </button>
-            </div>
-        </section>
-
-        <!-- Container cho tất cả các thử thách -->
-        <div id="challenges-container">
-            <!-- Thử thách hình dạng -->
-            <section class="challenge-section" id="pattern-challenge">
-                <h2>🎯 Thử Thách Hình Dạng</h2>
-                <div class="challenge-container">
-                    <div class="pattern-display">
-                        <div class="shape-sequence" id="shape-sequence">
-                            <!-- Các hình sẽ được tạo bằng JavaScript -->
-                        </div>
-                        <div class="question-mark">?</div>
-                    </div>
-                    
-                    <div class="answer-options" id="answer-options">
-                        <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
-                    </div>
-                    
-                    <div class="result" id="result"></div>
-                    <button class="new-challenge-btn" onclick="generateNewChallenge()">Thử Thách Mới</button>
-                </div>
-            </section>
-
-            <!-- Thử thách tính toán -->
-            <section class="challenge-section" id="math-challenge" style="display: none;">
-                <h2>🎯 Thử Thách Tính Toán</h2>
-                <div class="challenge-container">
-                    <div class="math-display">
-                        <div class="math-sequence" id="math-sequence">
-                            <!-- Các phép tính sẽ được tạo bằng JavaScript -->
-                        </div>
-                        <div class="question-mark">?</div>
-                    </div>
-                    
-                    <div class="answer-options" id="math-answer-options">
-                        <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
-                    </div>
-                    
-                    <div class="result" id="math-result"></div>
-                    <button class="new-challenge-btn" onclick="generateNewMathChallenge()">Thử Thách Mới</button>
-                </div>
-            </section>
-
-            <!-- Thử thách xếp hàng -->
-            <section class="challenge-section" id="queue-challenge" style="display: none;">
-                <h2>🎯 Thử Thách Xếp Hàng</h2>
-                <div class="challenge-container">
-                    <div class="queue-visualization" id="queue-visualization">
-                        <!-- Hình ảnh hàng người sẽ được tạo bằng JavaScript -->
-                    </div>
-                    
-                    <div class="queue-question" id="queue-question">
-                        <!-- Câu hỏi sẽ được tạo bằng JavaScript -->
-                    </div>
-                    
-                    <div class="answer-options" id="queue-answer-options">
-                        <!-- Các lựa chọn sẽ được tạo bằng JavaScript -->
-                    </div>
-                    
-                    <div class="result" id="queue-result"></div>
-                    <button class="new-challenge-btn" onclick="generateNewQueueChallenge()">Thử Thách Mới</button>
-                </div>
-            </section>
+        <div class="header">
+            <h1>🛍️ Sản phẩm Shopee</h1>
+            <p>Nhấn vào nút bên dưới để xem sản phẩm</p>
         </div>
-
-        <!-- Phần dành cho bố mẹ -->
-        <section class="parent-section">
-            <h3>📋 Kịch Bản Cho Bố Mẹ</h3>
-            <div class="script-box">
-                <p><strong>Hướng dẫn:</strong></p>
-                <p id="parent-script">
-                    Chọn một thử thách để bắt đầu!
-                </p>
-                <div class="tips">
-                    <p><strong>💡 Mẹo:</strong></p>
-                    <ul id="tips-list">
-                        <li>Khuyến khích bé quan sát kỹ trước khi chọn</li>
-                        <li>Nếu bé chọn sai, hãy giải thích quy luật một cách đơn giản</li>
-                        <li>Khen ngợi khi bé tìm ra đáp án đúng</li>
-                        <li>Với thử thách tính toán: có thể dùng đồ vật cụ thể để minh họa</li>
-                        <li>Với thử thách hình dạng: giúp bé nhận biết quy luật lặp lại</li>
-                        <li>Với thử thách xếp hàng: hãy hướng dẫn bé đếm từng người một cách cẩn thận</li>
-                    </ul>
+        
+        <div class="content">
+            <div id="productContainer">
+                <div class="loading">Đang tải thông tin sản phẩm...</div>
+            </div>
+            
+            <a href="https://s.shopee.vn/gIn99ibbp" class="product-link" target="_blank" rel="noopener noreferrer">
+                Mua ngay trên Shopee
+            </a>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">✅</div>
+                    <div class="feature-text">Chính hãng</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚚</div>
+                    <div class="feature-text">Giao hàng nhanh</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-text">Giá tốt</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-text">Đổi trả dễ dàng</div>
                 </div>
             </div>
-        </section>
+            
+            <div class="info">
+                <p>
+                    <strong>🎁 Mua sắm an toàn trên Shopee</strong><br>
+                    Nhấn vào nút trên để được chuyển đến trang sản phẩm chính thức trên Shopee.
+                    Bạn sẽ được hưởng đầy đủ các chính sách bảo hành và đổi trả của Shopee.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- Loading indicator -->
-    <div id="loading" style="display: none;">
-        <p>Đang tải thử thách...</p>
-    </div>
-
-    <!-- JavaScript modules -->
-    <script src="js/config.js"></script>
-    <script src="js/base-challenge.js"></script>
-    <script src="js/challenges/pattern-challenge.js"></script>
-    <script src="js/challenges/math-challenge.js"></script>
-    <script src="js/challenges/queue-challenge.js"></script>
-    <script src="js/template-manager.js"></script>
-    <script src="js/app.js"></script>
+    <script>
+        // Hình ảnh sản phẩm
+        const productImages = [
+            'https://down-vn.img.susercontent.com/file/6e35e26bd637992acec1fced09ea8095.webp',
+            'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lkgi91fart0cc2.webp'
+        ];
+        
+        function displayProduct() {
+            const container = document.getElementById('productContainer');
+            
+            let html = '<div class="product-images">';
+            html += `<img src="${productImages[0]}" alt="Product" class="product-image-main" id="mainImage">`;
+            
+            if (productImages.length > 1) {
+                html += '<div class="product-thumbnails">';
+                productImages.forEach((img, index) => {
+                    html += `<img src="${img}" alt="Thumbnail ${index + 1}" 
+                             class="product-thumbnail ${index === 0 ? 'active' : ''}" 
+                             onclick="changeMainImage('${img}', this)">`;
+                });
+                html += '</div>';
+            }
+            html += '</div>';
+            
+            html += '<div class="product-info-box">';
+            html += '<div class="product-title">Tất Thể thao Redikick R365 Cổ cao Có đệm Chống hôi chân vớ Bóng Rổ Pickleball Gym Chạy Bộ</div>';
+            html += '<div class="product-price">56.000₫ - 179.000₫</div>';
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+        
+        function changeMainImage(imgUrl, thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = imgUrl;
+            
+            // Cập nhật active thumbnail
+            document.querySelectorAll('.product-thumbnail').forEach(t => {
+                t.classList.remove('active');
+            });
+            thumbnail.classList.add('active');
+        }
+        
+        // Load product data khi trang được tải
+        window.addEventListener('DOMContentLoaded', displayProduct);
+    </script>
 </body>
 </html>
