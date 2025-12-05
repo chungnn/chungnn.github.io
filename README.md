@@ -1,53 +1,26 @@
-# Thử Thách Logic Hàng Ngày
+﻿# Trang Sản Phẩm Shopee
 
-Một trang web đơn giản giúp trẻ em phát triển tư duy logic thông qua các bài tập nhận dạng quy luật.
+Trang web đơn giản hiển thị sản phẩm từ Shopee với giao diện đẹp mắt.
 
 ## Tính năng
 
-### Phần dành cho trẻ em:
-- Hiển thị dãy hình với quy luật đơn giản (tròn, vuông, tam giác)
-- Giao diện tương tác với hiệu ứng đẹp mắt
-- Phản hồi tức thì khi chọn đáp án
-- Hiệu ứng pháo hoa khi trả lời đúng
-- 5 mẫu thử thách khác nhau
+- 🖼️ Gallery hình ảnh sản phẩm với thumbnail
+- 💰 Hiển thị giá sản phẩm
+- 🔗 Liên kết trực tiếp đến trang Shopee
+- 📱 Responsive design - tương thích mọi thiết bị
+- ✨ Hiệu ứng animation mượt mà
 
-### Phần dành cho bố mẹ:
-- Kịch bản gợi ý cách hướng dẫn con
-- Mẹo giúp khuyến khích trẻ tư duy
-- Hướng dẫn cách giải thích khi trẻ chọn sai
+## Truy cập
 
-## Cách sử dụng
+- Trang chủ: https://chungnn.github.io
+- Trang sản phẩm: https://chungnn.github.io/product.html
 
-1. Mở trang web trên trình duyệt
-2. Bố mẹ đọc kịch bản ở phần dưới
-3. Hướng dẫn con quan sát dãy hình và tìm quy luật
-4. Để con tự chọn đáp án bằng cách bấm vào hình
-5. Bấm "Thử Thách Mới" để tạo bài tập khác
+## Cấu trúc
 
-## Cách triển khai lên GitHub Pages
+- `index.html` - Trang sản phẩm chính (CSS & JS inline)
+- `product.html` - Trang sản phẩm phụ
+- `README.md` - File hướng dẫn này
 
-1. Đẩy code lên repository `olympic.github.io`
-2. Vào Settings của repository
-3. Trong phần Pages, chọn source là `main branch`
-4. Trang web sẽ có thể truy cập tại `https://[username].github.io/olympic.github.io`
+## Deployment
 
-## Cấu trúc file
-
-- `index.html` - Giao diện chính
-- `style.css` - Styling và hiệu ứng
-- `script.js` - Logic tương tác và các thử thách
-- `README.md` - Hướng dẫn này
-
-## Tùy chỉnh thử thách
-
-Để thêm thử thách mới, chỉnh sửa mảng `challenges` trong file `script.js`:
-
-```javascript
-{
-    pattern: ['circle', 'square', 'circle', 'square'], // Dãy hình
-    correct: 'circle', // Đáp án đúng
-    script: 'Kịch bản cho bố mẹ...' // Hướng dẫn
-}
-```
-
-Các hình có sẵn: `circle`, `square`, `triangle`
+Trang web được tự động deploy lên GitHub Pages khi push code lên branch `main`.
