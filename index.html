@@ -160,6 +160,14 @@
             font-weight: bold;
         }
 
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 10px;
+            text-align: left;
+        }
+
         .loading {
             text-align: center;
             padding: 20px;
@@ -297,54 +305,21 @@
     </div>
 
     <script>
-        // Danh sách sản phẩm
-        const products = [
-            {
-                name: 'Tất Thể thao Redikick R365 Cổ cao Có đệm Chống hôi chân vớ Bóng Rổ Pickleball Gym Chạy Bộ',
-                price: '56.000₫ - 179.000₫',
-                url: 'https://s.shopee.vn/gIn99ibbp',
-                images: [
-                    'https://down-vn.img.susercontent.com/file/6e35e26bd637992acec1fced09ea8095.webp',
-                    'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lkgi91fart0cc2.webp'
-                ]
-            },
-            {
-                name: 'ANTAY1-Áo khoác Jean (vải Đẹp) Full mẫu xanh denim/ nhạt Retro dáng lỡ Siêu đẹp #J8039',
-                price: '208.999₫ - 216.600₫',
-                url: 'https://s.shopee.vn/VzMygYBJw',
-                images: [
-                    'https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg27hz09mdqi40.webp',
-                    'https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg6dy8367hu6ad.webp'
-                ]
-            },
-            {
-                name: 'Chậu thông minh kèm lưới ĐỦ SIZE - Chậu nhựa trồng rau CAO CẤP HÀNG CÔNG TY',
-                price: '42.000₫ - 55.000₫',
-                url: 'https://s.shopee.vn/1LYVS7mRtU',
-                images: [
-                    'https://down-vn.img.susercontent.com/file/be6d36b04ec45d91a5b4f032f294d61c.webp',
-                    'https://down-vn.img.susercontent.com/file/bb32f7cb5fc7ee795c9eb34815509b17.webp'
-                ]
-            },
-            {
-                name: '[BLACKMORES] Viên Uống BLACKMORES GINKGOFORTE Lọ 40 Viên',
-                price: '451.637₫',
-                url: 'https://s.shopee.vn/1VrveQloYX',
-                images: [
-                    'https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mhx6jqz3liio54.webp',
-                    'https://down-vn.img.susercontent.com/file/vn-11134201-7ra0g-m8wwqqetdlkee2.webp'
-                ]
-            },
-            {
-                name: 'Bao cao su Feelex superthin hộp 30 bcs',
-                price: '204.000₫',
-                url: 'https://s.shopee.vn/30gjRXSGeG',
-                images: [
-                    'https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mgyilmpr7ll58e.webp',
-                    'https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg63gspdz767c2.webp'
-                ]
+        // Biến để lưu danh sách sản phẩm
+        let products = [];
+        
+        // Tải dữ liệu sản phẩm từ file JSON
+        async function loadProducts() {
+            try {
+                const response = await fetch('products.json');
+                products = await response.json();
+                displayProduct();
+            } catch (error) {
+                console.error('Lỗi khi tải sản phẩm:', error);
+                document.getElementById('productContainer').innerHTML = 
+                    '<div class="loading">Không thể tải thông tin sản phẩm. Vui lòng thử lại sau.</div>';
             }
-        ];
+        }
         
         function displayProduct() {
             const container = document.getElementById('productContainer');
@@ -369,6 +344,9 @@
                 
                 html += '<div class="product-info-box">';
                 html += `<div class="product-title">${product.name}</div>`;
+                if (product.description) {
+                    html += `<div class="product-description">${product.description}</div>`;
+                }
                 html += `<div class="product-price">${product.price}</div>`;
                 html += '</div>';
                 
@@ -393,7 +371,7 @@
         }
         
         // Load product data khi trang được tải
-        window.addEventListener('DOMContentLoaded', displayProduct);
+        window.addEventListener('DOMContentLoaded', loadProducts);
     </script>
 </body>
 </html>
