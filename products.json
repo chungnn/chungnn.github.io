@@ -1,5 +1,6 @@
 [
     {
+        "order": 1,
         "name": "Tất Thể thao Redikick R365 Cổ cao Có đệm Chống hôi chân vớ Bóng Rổ Pickleball Gym Chạy Bộ",
         "description": "Tất thể thao cao cấp với công nghệ chống hôi chân, có đệm êm ái, phù hợp cho mọi hoạt động thể thao như bóng rổ, pickleball, chạy bộ và gym.",
         "price": "56.000₫ - 179.000₫",
@@ -10,6 +11,7 @@
         ]
     },
     {
+        "order": 2,
         "name": "ANTAY1-Áo khoác Jean (vải Đẹp) Full mẫu xanh denim/ nhạt Retro dáng lỡ Siêu đẹp #J8039",
         "description": "Áo khoác jean xanh than denim là một sản phẩm thời trang đa năng, phù hợp với nhiều hoàn cảnh khác nhau. Bạn có thể mặc nó khi đi làm, đi chơi hay tham gia các hoạt động ngoài trời. Với chất liệu jean cao cấp, sản phẩm này sẽ giúp bạn tự tin và thoải mái trong mọi hoàn cảnh.",
         "price": "208.999₫ - 216.600₫",
@@ -20,6 +22,7 @@
         ]
     },
     {
+        "order": 3,
         "name": "Chậu thông minh kèm lưới ĐỦ SIZE - Chậu nhựa trồng rau CAO CẤP HÀNG CÔNG TY",
         "description": "Chậu trồng rau thông minh cao cấp, có lưới thoát nước, nhiều kích thước phù hợp mọi không gian. Chất liệu nhựa bền, an toàn.",
         "price": "42.000₫ - 55.000₫",
@@ -30,6 +33,7 @@
         ]
     },
     {
+        "order": 4,
         "name": "[BLACKMORES] Viên Uống BLACKMORES GINKGOFORTE Lọ 40 Viên",
         "description": "Viên uống bổ não Blackmores Ginkgo Forte, hỗ trợ tuần hoàn máu não, tăng cường trí nhớ và sự tập trung. Lọ 40 viên.",
         "price": "451.637₫",
@@ -40,6 +44,7 @@
         ]
     },
     {
+        "order": 5,
         "name": "Bao cao su Feelex superthin hộp 30 bcs",
         "description": "Bao cao su Feelex siêu mỏng, mang lại cảm giác tự nhiên nhất. Hộp 30 chiếc, an toàn và đáng tin cậy.",
         "price": "204.000₫",
@@ -47,6 +52,16 @@
         "images": [
             "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mgyilmpr7ll58e.webp",
             "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg63gspdz767c2.webp"
+        ]
+    },
+    {
+        "order": 6,
+        "name": "Máy Lọc Không Khí Xiaomi Mi Air Purifier 4 Compact/ 4 Lite/ Gen 4/ 4 Pro - Sạch Bụi Mịn PM2.5, Phấn Hoa, Lông Thú Cưng",
+        "description": "📍📍📍 LƯU Ý: Đây là phiên bản quốc tế, nên khi kết nối với ứng dụng Mi Home, khách cần chọn khu vực Việt Nam. Nếu trong nhà bạn đang dùng các thiết bị nội địa Trung Quốc (để khu vực Trung Quốc), thì không thể dùng chung với sản phẩm quốc tế trên cùng một tài khoản hoặc cùng một điện thoại. Vì vậy, hãy cân nhắc trước khi kết nối để tránh xung đột thiết bị.",
+        "url": "https://s.shopee.vn/6VGzRv5yuy",
+        "images": [
+            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mhpz75xf8zcxef.webp",
+            "https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m805s4zcyv5w6d.webp"
         ]
     }
 ]

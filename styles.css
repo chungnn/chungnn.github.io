@@ -2,6 +2,9 @@
     --primary-color: #ee4d2d;
     --primary-dark: #d73211;
     --secondary-color: #ff6b35;
+    --tet-red: #d4111f;
+    --tet-gold: #ffd700;
+    --tet-orange: #ff8c00;
     --text-dark: #333;
     --text-gray: #666;
     --text-light: #999;
@@ -24,13 +27,39 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #d4111f 0%, #ff6b35 50%, #ffd700 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Hạt vàng rơi Tết */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(circle, var(--tet-gold) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 215, 0, 0.5) 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px;
+    background-position: 0 0, 40px 40px;
+    animation: sparkle 20s linear infinite;
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+@keyframes sparkle {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100px) rotate(360deg); }
 }
 
 .container {
@@ -41,6 +70,8 @@ body {
     box-shadow: var(--shadow-lg);
     overflow: hidden;
     animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
 }
 
 @keyframes fadeInUp {
@@ -55,7 +86,7 @@ body {
 }
 
 .header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--tet-red) 0%, var(--tet-orange) 50%, var(--tet-gold) 100%);
     color: white;
     padding: 40px 30px;
     text-align: center;
@@ -70,8 +101,30 @@ body {
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
     animation: pulse 15s ease-in-out infinite;
+}
+
+/* Trang trí Tết */
+.tet-decoration {
+    font-size: 32px;
+    margin-bottom: 16px;
+    animation: bounce 2s ease-in-out infinite;
+    letter-spacing: 8px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.tet-greeting {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--tet-gold);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 12px 0;
+    letter-spacing: 1px;
 }
 
 @keyframes pulse {
@@ -266,14 +319,16 @@ body {
     padding: 24px;
     background: linear-gradient(135deg, #fff5f3 0%, #ffe8e4 100%);
     border-radius: var(--radius-md);
-    border: 1px solid #ffe0db;
+    border: 2px solid var(--tet-gold);
     text-align: center;
     transition: var(--transition);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 .feature:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    border-color: var(--tet-red);
 }
 
 .feature-icon {
@@ -291,9 +346,11 @@ body {
 .info {
     margin-top: 40px;
     padding: 28px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
     border-radius: var(--radius-md);
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid var(--tet-red);
+    border-right: 4px solid var(--tet-gold);
+    box-shadow: 0 0 20px rgba(212, 17, 31, 0.1);
 }
 
 .info p {
