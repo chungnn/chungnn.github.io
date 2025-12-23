@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HLS Demo</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.8.3/plyr.css" />
+    <style>
+      body {
+        max-width: 1024px;
+        }
+    </style>
+    
+  </head>
+  <body>
+    <video controls crossorigin playsinline poster="https://bitdash-a.akamaihd.net/content/sintel/poster.png"></video>
+    <script src="https://cdn.plyr.io/3.8.3/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const source = 'https://live-hq.evgcdn.net/live/4150dc743508c6241dbbb50570e92e2dc46/playlist.m3u8';
+            const video = document.querySelector('video');
+            
+            // For more options see: https://github.com/sampotts/plyr/#options
+            // captions.update is required for captions to work with hls.js
+            const player = new Plyr(video, {captions: {active: true, update: true, language: 'en'}});
+            
+            if (!Hls.isSupported()) {
+                video.src = source;
+            } else {
+                // For more Hls.js options, see https://github.com/dailymotion/hls.js
+                const hls = new Hls();
+                hls.loadSource(source);
+                hls.attachMedia(video);
+                window.hls = hls;
+                
+                // Handle changing captions
+                player.on('languagechange', () => {
+                    // Caption support is still flaky. See: https://github.com/sampotts/plyr/issues/994
+                    setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
+                });
+            }
+            
+            // Expose player so it can be used from the console
+            window.player = player;
+        });
+    </script>
+  </body>
+</html>
